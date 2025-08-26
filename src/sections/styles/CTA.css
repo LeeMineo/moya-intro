@@ -1,0 +1,86 @@
+/* 섹션 스타일 */
+.cta-section {
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #2A7FFF, #5DAFFF);
+  color: white;
+  text-align: center;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* 컨텐츠 스타일 */
+.cta-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  animation: slideInFromBottom 1.2s ease-out;
+}
+
+.cta-description {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  line-height: 1.6;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* 버튼 스타일 */
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.cta-button {
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.cta-button.primary {
+  background-color: white;
+  color: #2A7FFF;
+  font-weight: bold;
+}
+
+.cta-button.primary:hover {
+  background-color: #f2f2f2;
+  transform: scale(1.05);
+}
+
+.cta-button.secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.cta-button.secondary:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

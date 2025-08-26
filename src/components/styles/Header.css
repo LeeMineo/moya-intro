@@ -1,0 +1,28 @@
+.intro-header {
+    position: fixed;
+    top: 20px;
+    right: 40px;
+    z-index: 10;
+  }
+  
+  .anchor-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .anchor-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .anchor-links li a:hover {
+    color: #2A7FFF; /* 강조 색상 */
+  }
+  
