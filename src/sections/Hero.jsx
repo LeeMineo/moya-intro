@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 
 export default function Hero() {
   const APP_STORE_URL = "#"; // 실제 공개 시 교체
-  const PLAY_STORE_URL = "#"; // 실제 공개 시 교체
+  const PLAY_STORE_URL =
+    "https://drive.google.com/drive/folders/1hXTXdvSJJidUPCroXrDnkM-fwGDVY4dZ?usp=share_link"; // 실제 공개 시 교체
 
   // 이번 달 29일 00:00 (로컬)
   const [now, setNow] = useState(new Date());
@@ -21,6 +22,7 @@ export default function Hero() {
   const minutes = Math.floor((totalSec % 3600) / 60);
   const seconds = totalSec % 60;
   const pad = (n) => String(n).padStart(2, "0");
+  const isLaunched = diffMs === 0; // 29일 00:00 이후면 true
 
   return (
     <section id="hero" className="hero">
@@ -41,34 +43,39 @@ export default function Hero() {
           <strong>생리대 교체 타이밍</strong>을 미리 알려드려요.
         </p>
 
-        {/* 다운로드 버튼 비활성화 + 카운트다운 */}
-        <div className="stores disabled" aria-label="download buttons (출시 예정)">
-          <a
+        {/* 다운로드 버튼: 출시 전엔 비활성, 이후엔 활성 */}
+        <div
+          className={`stores ${isLaunched ? '' : 'disabled'}`}
+          aria-label={isLaunched ? 'download buttons' : 'download buttons (출시 예정)'}
+        >
+          {/* <a
             className="store"
             href={APP_STORE_URL}
-            onClick={(e) => e.preventDefault()}
-            aria-disabled="true"
-            tabIndex={-1}
-            role="link"
-            title="App Store (출시 예정)"
+            title={isLaunched ? "App Store로 열기" : "App Store (출시 예정)"}
+            target={isLaunched ? "_blank" : undefined}
+            rel={isLaunched ? "noopener noreferrer" : undefined}
           >
-            <img src="/assets/logo/app-store-logo.png" alt="App Store (출시 예정)" />
-          </a>
+            <img
+              src="/assets/logo/app-store-logo.png"
+              alt={isLaunched ? "App Store로 열기" : "App Store (출시 예정)"}
+            />
+          </a> */}
           <a
             className="store"
             href={PLAY_STORE_URL}
-            onClick={(e) => e.preventDefault()}
-            aria-disabled="true"
-            tabIndex={-1}
-            role="link"
-            title="Google Play (출시 예정)"
+            title={isLaunched ? "Google Play로 열기" : "Google Play (출시 예정)"}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <img src="/assets/logo/google-play-logo.png" alt="Google Play (출시 예정)" />
+            <img
+              src="/assets/logo/google-play-logo.png"
+              alt={isLaunched ? "Google Play로 열기" : "Google Play (출시 예정)"}
+            />
           </a>
         </div>
 
-        {/* 아주 작은 핑크색 시간 표시 */}
-        {diffMs > 0 && (
+        {/* 아주 작은 핑크색 시간 표시: 출시 전만 노출 */}
+        {!isLaunched && (
           <div className="countdown-mini">
             D-{days} {pad(hours)}:{pad(minutes)}:{pad(seconds)} 뒤에 열려요!
           </div>
@@ -116,7 +123,7 @@ export default function Hero() {
         .sub strong { color: #ffffff; font-weight: 700; }
         .m-br { display: none; } /* 데스크톱 기본 숨김 */
 
-        .stores { display: flex; gap: 18px; align-items: center; margin-top: clamp(80px, 6vw, 40px);}
+        .stores { display: flex; gap: 18px; align-items: center; margin-top: clamp(80px, 6vw, 40px); }
         .store img { height: clamp(36px, 6vw, 48px); width: auto; filter: drop-shadow(0 2px 10px rgba(0,0,0,.35)); transition: transform .2s; }
         .store img:hover { transform: translateY(-2px); }
 
